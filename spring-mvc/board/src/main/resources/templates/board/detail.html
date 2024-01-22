@@ -28,7 +28,8 @@
 
 		<div class="btn-wrapper">
 			<a role="button" th:href="@{/board/list}">Board</a>
-			<button type="submit">Update</button>
+			<button th:onclick="|location.href='@{/board/{id}/update(id=${board.id})}'|"
+					type="button">Update</button>
 			<button th:onclick="|location.href='@{/board/{id}/delete(id=${board.id})}'|"
 					type="button">Delete</button>
 		</div>
