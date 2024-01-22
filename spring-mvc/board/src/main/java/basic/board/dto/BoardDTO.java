@@ -18,7 +18,7 @@ public class BoardDTO {
     private String title;
     private String content;
     private int hits;
-    private String createdTime;
+    private String createdTime = TimeParser.convertToString(LocalDateTime.now());
 
     @Override
     public String toString() {
@@ -37,7 +37,7 @@ public class BoardDTO {
         String password = board.getPassword();
         String title = board.getTitle();
         String content = board.getContent();
-        int hits = board.getHits();
+        Integer hits = board.getHits();
         String createdTime = TimeParser.convertToString(board.getCreatedTime());
         return new BoardDTO(id, writer, password, title, content, hits, createdTime);
     }

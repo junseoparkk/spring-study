@@ -5,6 +5,7 @@ import basic.board.entity.Board;
 import basic.board.service.BoardService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,5 +52,19 @@ public class BoardController {
     public String delete(@PathVariable(name = "id") Long id) {
         boardService.delete(id);
         return "redirect:/board/list";
+    }
+
+    @GetMapping("/{id}/update")
+    public String updateForm(@PathVariable(name = "id") Long id, Model model) {
+        Board board = boardService.findOnlyById(id);
+        model.addAttribute(board);
+        return "/board/update";
+    }
+
+    @PostMapping("/{id}/update")
+    public String update(@PathVariable(name = "id") Long id, Board updatedBoard) {
+        boardService.update(id, updatedBoard);
+        Board board = boardService.findOnlyById(id);
+        return "redirect:/board/{id}";
     }
 }
