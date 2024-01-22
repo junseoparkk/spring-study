@@ -1,6 +1,7 @@
 package basic.board.dto;
 
 import basic.board.entity.Board;
+import basic.board.utils.parser.TimeParser;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,6 +18,7 @@ public class BoardDTO {
     private String title;
     private String content;
     private int hits;
+    private String createdTime;
 
     @Override
     public String toString() {
@@ -36,6 +38,7 @@ public class BoardDTO {
         String title = board.getTitle();
         String content = board.getContent();
         int hits = board.getHits();
-        return new BoardDTO(id, writer, password, title, content, hits);
+        String createdTime = TimeParser.convertToString(board.getCreatedTime());
+        return new BoardDTO(id, writer, password, title, content, hits, createdTime);
     }
 }

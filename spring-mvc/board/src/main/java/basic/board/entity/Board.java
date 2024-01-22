@@ -16,6 +16,7 @@ public class Board {
     private String title;
     private String content;
     private int hits;
+    private LocalDateTime createdTime;
 
     public static Board from(final BoardDTO boardDTO) {
         Long id = -1L;
@@ -23,8 +24,9 @@ public class Board {
         String password  = boardDTO.getPassword();
         String title = boardDTO.getTitle();
         String content = boardDTO.getContent();
+        LocalDateTime createdTime = LocalDateTime.now();
         int hits = boardDTO.getHits();
-        return new Board(id, writer, password, title, content, hits);
+        return new Board(id, writer, password, title, content, hits, createdTime);
     }
 
     public void setId(final Long id) {
