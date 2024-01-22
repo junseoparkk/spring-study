@@ -6,30 +6,33 @@
 	<title>list</title>
 </head>
 <body>
-<h1 class="title">게시판</h1>
+<h1 class="title">Board</h1>
 <div class="container">
-	<table>
-		<thead>
-		<tr>
-			<th>id</th>
-			<th>title</th>
-			<th>writer</th>
-			<th>date</th>
-			<th>hits</th>
-		</tr>
-		</thead>
-		<tbody>
-		<tr th:each="board: ${boards}">
-			<td><a th:text="${board.id}" th:href="@{|/board/${board.id}|}"></a></td>
-			<td><a th:text="${board.title}" th:href="@{|/board/${board.id}|}"></a></td>
-			<td th:text="${board.writer}"></td>
-			<td th:text="${board.createdTime}"></td>
-			<td th:text="${board.hits}"></td>
-		</tr>
-		</tbody>
-	</table>
-	<div>
+	<div class="table-wrapper">
+		<table>
+			<thead>
+			<tr>
+				<th>id</th>
+				<th>title</th>
+				<th>writer</th>
+				<th>date</th>
+				<th>hits</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:each="board: ${boards}">
+				<td><a th:text="${board.id}" th:href="@{|/board/${board.id}|}"></a></td>
+				<td><a th:text="${board.title}" th:href="@{|/board/${board.id}|}"></a></td>
+				<td th:text="${board.writer}"></td>
+				<td th:text="${board.createdTime}"></td>
+				<td th:text="${board.hits}"></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
 
+	<div class="btn-wrapper">
+		<a class="btn" role="button" th:href="@{/}">Home</a>
 	</div>
 </div>
 </body>

@@ -10,14 +10,21 @@ body {
 
 .container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    padding-inline: 10rem;
+}
+
+.table-wrapper {
+    width: 100%;
 }
 
 table {
   border: 1px #a39485 solid;
   font-size: .9em;
+  width: 100%;
   box-shadow: 0 2px 5px rgba(0,0,0,.25);
-  width: 60%;
   border-collapse: collapse;
   border-radius: 5px;
   overflow: hidden;
@@ -29,6 +36,7 @@ th {
 
 thead {
   font-weight: bold;
+  width: 100%;
   color: #fff;
   background: #73685d;
 }
@@ -44,8 +52,32 @@ td {
   background: #fff;
 }
 
-a {
-  color: #73685d;
+.btn-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  padding-top: 70px;
+  width: 100%;
+
+  & .btn {
+      padding-inline: 70px;
+  }
+
+  & a {
+    border: none;
+    padding-block: 15px;
+    padding-inline: 80px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    background-color: #73685d;
+    border-radius: 5px;
+    transition: opacity 0.3s ease;
+  }
+
+  & a:hover {
+    opacity: 0.9;
+  }
 }
 
  @media all and (max-width: 768px) {
@@ -89,6 +121,4 @@ a {
   td {
     border-bottom: 1px solid #e5e5e5;
   }
-
-
-  }
+}
