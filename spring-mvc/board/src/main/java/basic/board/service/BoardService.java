@@ -10,5 +10,5 @@ public interface BoardService {
     Board findById(Long id);
     List<BoardDTO> findAll();
     Board update();
-    void delete();
+    void delete(Long id);
 }

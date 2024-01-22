@@ -8,5 +8,5 @@ public interface BoardRepository {
     Board findById(Long id);
     List<Board> findAll();
     Board update();
-    void delete();
+    void delete(Long id);
 }

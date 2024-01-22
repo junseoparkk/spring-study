@@ -36,7 +36,7 @@ public class MemoryBoardRepository implements BoardRepository {
     }
 
     @Override
-    public void delete() {
-
+    public void delete(final Long id) {
+        boards.remove(id);
     }
 }
