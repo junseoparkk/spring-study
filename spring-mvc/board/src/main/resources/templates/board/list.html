@@ -6,7 +6,7 @@
 	<title>list</title>
 </head>
 <body>
-<h1 class="title">글 목록</h1>
+<h1 class="title">게시판</h1>
 <div class="container">
 	<table>
 		<thead>
@@ -23,7 +23,7 @@
 			<td><a th:text="${board.id}" th:href="@{|/board/${board.id}|}"></a></td>
 			<td><a th:text="${board.title}" th:href="@{|/board/${board.id}|}"></a></td>
 			<td th:text="${board.writer}"></td>
-			<td th:text="${board.content}"></td>
+			<td th:text="${board.createdTime}"></td>
 			<td th:text="${board.hits}"></td>
 		</tr>
 		</tbody>
