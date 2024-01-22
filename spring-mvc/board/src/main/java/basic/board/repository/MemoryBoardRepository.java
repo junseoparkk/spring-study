@@ -2,6 +2,7 @@ package basic.board.repository;
 
 import basic.board.entity.Board;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -46,6 +47,7 @@ public class MemoryBoardRepository implements BoardRepository {
         int limit = request.getPageSize();
 
         List<Board> boards = findAll();
+        Collections.reverse(boards);
         int totalBoards = boards.size();
 
         List<Board> pagedBoards = boards.subList(offset, Math.min(offset + limit, totalBoards));

@@ -33,9 +33,20 @@ public class BoardController {
     }
 
     @GetMapping("/list")
-    public String findAll(Model model) {
-        List<BoardDTO> boards = boardService.findAll();
+    public String findAll(@PageableDefault(page = 1) Pageable pageable, Model model) {
+        Page<BoardDTO> boards = boardService.paging(pageable);
+        int blockLimit = 5;
+        int startPage = (((int)(Math.ceil((double)pageable.getPageNumber() / blockLimit))) - 1) * blockLimit + 1;
+        int endPage = Math.min((startPage + blockLimit - 1), boards.getTotalPages());
+
         model.addAttribute("boards", boards);
+        model.addAttribute("startPage", startPage);
+
+        if (endPage == 0) {
+            model.addAttribute("endPage", startPage);
+        } else {
+            model.addAttribute("endPage", endPage);
+        }
         return "/board/list";
     }
 
@@ -65,19 +76,5 @@ public class BoardController {
         boardService.update(id, updatedBoard);
         Board board = boardService.findOnlyById(id);
         return "redirect:/board/{id}";
-    }
-
-    @GetMapping("/list/paging")
-    public String paging(@PageableDefault(page = 1) Pageable pageable, Model model) {
-        //pageable.getPageNumber();
-        Page<BoardDTO> boards = boardService.paging(pageable);
-        int blockLimit = 3;
-        int startPage = (((int)(Math.ceil((double)pageable.getPageNumber() / blockLimit))) - 1) * blockLimit + 1;
-        int endPage = Math.min((startPage + blockLimit - 1), boards.getTotalPages());
-
-        model.addAttribute("boards", boards);
-        model.addAttribute("startPage", startPage);
-        model.addAttribute("endPage", endPage);
-        return "/board/list/paging";
     }
 }
