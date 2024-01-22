@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class MemoryBoardRepository implements BoardRepository {
     private Long sequence = 0L;
-    private Map<Long, Board> boards = new ConcurrentHashMap<>();
+    private final Map<Long, Board> boards = new ConcurrentHashMap<>();
 
     @Override
     public Board save(final Board board) {
@@ -22,7 +22,7 @@ public class MemoryBoardRepository implements BoardRepository {
 
     @Override
     public Board findById(Long id) {
-        return null;
+        return boards.get(id);
     }
 
     @Override

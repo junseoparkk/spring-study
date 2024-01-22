@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,5 +37,13 @@ public class BoardController {
         List<BoardDTO> boards = boardService.findAll();
         model.addAttribute("boards", boards);
         return "/board/list";
+    }
+
+    @GetMapping("/{id}")
+    public String findOne(@PathVariable(name = "id") Long id, Model model) {
+        Board board = boardService.findById(id);
+        System.out.println(board.toString());
+        model.addAttribute("board", board);
+        return "/board/detail";
     }
 }

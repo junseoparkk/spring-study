@@ -19,8 +19,8 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public Board findById(Long id) {
-        return null;
+    public Board findById(final Long id) {
+        return boardRepository.findById(id);
     }
 
     @Override

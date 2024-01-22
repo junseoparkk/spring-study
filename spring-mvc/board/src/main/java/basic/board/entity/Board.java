@@ -15,7 +15,7 @@ public class Board {
     private String password;
     private String title;
     private String content;
-    private int hits;
+    private Integer hits;
     private LocalDateTime createdTime;
 
     public static Board from(final BoardDTO boardDTO) {
