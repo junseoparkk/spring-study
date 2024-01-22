@@ -22,6 +22,9 @@ public class MemoryBoardRepository implements BoardRepository {
 
     @Override
     public Board findById(Long id) {
+        Board findBoard = boards.get(id);
+        findBoard.updateHits();
+        boards.put(findBoard.getId(), findBoard);
         return boards.get(id);
     }
 
