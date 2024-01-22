@@ -3,6 +3,8 @@ package basic.board.service;
 import basic.board.dto.BoardDTO;
 import basic.board.entity.Board;
 import basic.board.repository.BoardRepository;
+import basic.board.utils.parser.TimeParser;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -15,12 +17,25 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public Board save(final BoardDTO boardDTO) {
-        return boardRepository.save(Board.from(boardDTO));
+        Long id = 0L;
+        String writer = boardDTO.getWriter();
+        String password = boardDTO.getPassword();
+        String title = boardDTO.getTitle();
+        String content = boardDTO.getContent();
+        Integer hits = boardDTO.getHits();
+        LocalDateTime createdTime = TimeParser.convertToTime(boardDTO.getCreatedTime());
+        Board board = new Board(id, writer, password, title, content, hits, createdTime);
+        return boardRepository.save(board);
     }
 
     @Override
     public Board findById(final Long id) {
         return boardRepository.findById(id);
+    }
+
+    @Override
+    public Board findOnlyById(final Long id) {
+        return boardRepository.findOnlyById(id);
     }
 
     @Override
@@ -34,8 +49,8 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public Board update() {
-        return null;
+    public Board update(final Long id, final Board updatedBoard) {
+        return boardRepository.update(id, updatedBoard);
     }
 
     @Override

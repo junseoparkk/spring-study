@@ -15,16 +15,20 @@ public class MemoryBoardRepository implements BoardRepository {
     @Override
     public Board save(final Board board) {
         board.setId(++sequence);
-        System.out.println("board.getId() = " + board.getId());
         boards.put(board.getId(), board);
         return board;
     }
 
     @Override
-    public Board findById(Long id) {
+    public Board findById(final Long id) {
         Board findBoard = boards.get(id);
         findBoard.updateHits();
-        boards.put(findBoard.getId(), findBoard);
+        boards.replace(findBoard.getId(), findBoard);
+        return boards.get(id);
+    }
+
+    @Override
+    public Board findOnlyById(final Long id) {
         return boards.get(id);
     }
 
@@ -34,8 +38,9 @@ public class MemoryBoardRepository implements BoardRepository {
     }
 
     @Override
-    public Board update() {
-        return null;
+    public Board update(final Long id, final Board updatedBoard) {
+        boards.get(id).setContent(updatedBoard.getContent());
+        return boards.get(id);
     }
 
     @Override
