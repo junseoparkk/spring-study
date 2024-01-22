@@ -29,7 +29,7 @@ public class BoardController {
     @PostMapping("/save")
     public String save(BoardDTO boardDTO) {
         boardService.save(boardDTO);
-        return "index";
+        return "redirect:/board/list";
     }
 
     @GetMapping("/list")
