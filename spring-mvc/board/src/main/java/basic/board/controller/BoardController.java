@@ -5,16 +5,15 @@ import basic.board.entity.Board;
 import basic.board.service.BoardService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
@@ -66,5 +65,19 @@ public class BoardController {
         boardService.update(id, updatedBoard);
         Board board = boardService.findOnlyById(id);
         return "redirect:/board/{id}";
+    }
+
+    @GetMapping("/list/paging")
+    public String paging(@PageableDefault(page = 1) Pageable pageable, Model model) {
+        //pageable.getPageNumber();
+        Page<BoardDTO> boards = boardService.paging(pageable);
+        int blockLimit = 3;
+        int startPage = (((int)(Math.ceil((double)pageable.getPageNumber() / blockLimit))) - 1) * blockLimit + 1;
+        int endPage = Math.min((startPage + blockLimit - 1), boards.getTotalPages());
+
+        model.addAttribute("boards", boards);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+        return "/board/list/paging";
     }
 }

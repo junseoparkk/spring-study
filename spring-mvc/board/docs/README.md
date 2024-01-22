@@ -19,3 +19,5 @@
 4. 글수정 : /board/update/{id}
 5. 글삭제 : /board/delete/{id}
 6. 페이징처리 : /board/paging
+   - /board/list/paging?page=2
+   - /board/list/paging/2

@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -35,6 +38,18 @@ public class MemoryBoardRepository implements BoardRepository {
     @Override
     public List<Board> findAll() {
         return new ArrayList<>(boards.values());
+    }
+
+    @Override
+    public Page<Board> findAllByPaging(PageRequest request) {
+        int offset = request.getPageNumber() * request.getPageSize();
+        int limit = request.getPageSize();
+
+        List<Board> boards = findAll();
+        int totalBoards = boards.size();
+
+        List<Board> pagedBoards = boards.subList(offset, Math.min(offset + limit, totalBoards));
+        return new PageImpl<>(pagedBoards, request, totalBoards);
     }
 
     @Override

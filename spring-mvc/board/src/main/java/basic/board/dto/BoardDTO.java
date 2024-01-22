@@ -20,6 +20,15 @@ public class BoardDTO {
     private int hits;
     private String createdTime = TimeParser.convertToString(LocalDateTime.now());
 
+    public BoardDTO(Long id, String writer, String title, String content, int hits, String createdTime) {
+        this.id = id;
+        this.writer = writer;
+        this.title = title;
+        this.content = content;
+        this.hits = hits;
+        this.createdTime = createdTime;
+    }
+
     @Override
     public String toString() {
         return "BoardDTO{" +
