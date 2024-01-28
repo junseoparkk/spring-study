@@ -21,3 +21,8 @@
 6. 페이징처리 : /board/paging
    - /board/list/paging?page=2
    - /board/list/paging/2
+
+# 개선할 점
+1. 로컬 저장소 -> JPA, MySQL 등 DB 활용
+2. 회원 로그인 및 회원가입 기능
+3. ERD 및 API Document 작성
