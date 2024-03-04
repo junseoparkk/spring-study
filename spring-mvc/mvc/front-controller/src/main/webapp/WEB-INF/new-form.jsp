@@ -1,16 +1,16 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: junseopark
-  Date: 3/4/24
-  Time: 10:15 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <head>
-    <title>$Title$</title>
-  </head>
-  <body>
-  $END$
-  </body>
+<head>
+    <title>Title</title>
+</head>
+<body>
+
+<!-- 상대경로 사용, [현재 URL이 속한 계층 경로 + /save] -->
+<form action="save" method="post">
+    userName: <input type="text", name="userName"/>
+    age:      <input type="text", name="age"/>
+    <button type="submit">전송</button>
+</form>
+
+</body>
 </html>
