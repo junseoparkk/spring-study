@@ -5,7 +5,6 @@
     <title>Title</title>
 </head>
 <body>
-<a href="/">메인</a>
 <table>
     <thead>
     <th>ID</th>
